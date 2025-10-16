@@ -1,0 +1,629 @@
+/* Player Stats Page */
+.player-stats-page {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.player-stats-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.player-stats-page h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 2rem 0;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+/* Stats Grid Container */
+.player-stats-page > p {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1.25rem 1.5rem;
+  margin: 0 0 1rem 0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.player-stats-page > p::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(180deg, #00d4ff, #0066ff);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.player-stats-page > p:hover {
+  transform: translateX(8px);
+  box-shadow: 0 8px 20px rgba(0, 100, 255, 0.2);
+}
+
+.player-stats-page > p:hover::before {
+  transform: scaleY(1);
+}
+
+.player-stats-page strong {
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}
+
+.player-stats-page strong::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #0066ff;
+  border-radius: 50%;
+  margin-left: 0.75rem;
+}
+
+.player-stats-page p:not(:has(strong)) {
+  color: #1a202c;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+/* Specific stat highlights */
+.player-stats-page > p:nth-child(2) strong::after {
+  background: #764ba2;
+}
+
+.player-stats-page > p:nth-child(5),
+.player-stats-page > p:nth-child(6) {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 102, 255, 0.15));
+  border-left: 4px solid #00d4ff;
+}
+
+.player-stats-page > p:nth-child(5):hover,
+.player-stats-page > p:nth-child(6):hover {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(0, 102, 255, 0.25));
+}
+
+/* Cards stat special styling */
+.player-stats-page > p:has(strong:contains("Cards")) {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(244, 67, 54, 0.15));
+}
+
+/* Team stat special styling */
+.player-stats-page > p:last-child {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Player Comments Section */
+.player-comments {
+  max-width: 1000px;
+  margin: 3rem auto 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.player-comments h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 2rem 0;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.player-comments h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+/* Add Comment Form */
+.add-comment {
+  margin-bottom: 2.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.add-comment:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-comment textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  color: #2d3748;
+}
+
+.add-comment textarea::placeholder {
+  color: #a0aec0;
+}
+
+.add-comment textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.add-comment button {
+  margin-top: 1rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.add-comment button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.add-comment button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.add-comment button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Login Prompt */
+.player-comments > p {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 102, 255, 0.1));
+  border-radius: 12px;
+  color: #2d3748;
+  font-weight: 500;
+  border: 2px dashed #0066ff;
+  margin-bottom: 2rem;
+}
+
+/* Comments List */
+.player-comments ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.player-comments ul > p {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #a0aec0;
+  font-size: 1.125rem;
+  background: #f7fafc;
+  border-radius: 12px;
+}
+
+.player-comments li {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.player-comments li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #667eea, #764ba2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.player-comments li:hover {
+  border-color: #667eea;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+  transform: translateX(4px);
+}
+
+.player-comments li:hover::before {
+  opacity: 1;
+}
+
+.player-comments li strong {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+}
+
+.player-comments li em {
+  display: block;
+  margin-top: 0.75rem;
+  color: #a0aec0;
+  font-size: 0.875rem;
+  font-style: normal;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .player-comments {
+    margin: 2rem 1rem 1rem;
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .player-comments h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .add-comment {
+    padding: 1rem;
+  }
+
+  .add-comment button {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .player-comments li {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-comments {
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+
+  .player-comments h2 {
+    font-size: 1.25rem;
+  }
+
+  .add-comment textarea {
+    font-size: 0.9375rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .player-comments {
+    background: #1a202c;
+  }
+
+  .player-comments h2 {
+    color: #ffffff;
+  }
+
+  .add-comment {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-color: #2d3748;
+  }
+
+  .add-comment textarea {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #ffffff;
+  }
+
+  .add-comment textarea:focus {
+    border-color: #667eea;
+  }
+
+  .player-comments > p {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 102, 255, 0.15));
+    color: #e2e8f0;
+  }
+
+  .player-comments ul > p {
+    background: #2d3748;
+    color: #718096;
+  }
+
+  .player-comments li {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+  }
+
+  .player-comments li:hover {
+    border-color: #667eea;
+  }
+
+  .player-comments li em {
+    color: #718096;
+  }
+}
+
+/* Player Header Section */
+.player-stats-page h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Favorite Button */
+.favorite-btn {
+  top: -70px;
+  position: relative;
+  z-index: 10; 
+  margin-left: 800px;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  color: #667eea;
+  backdrop-filter: blur(10px);
+}
+
+.favorite-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.favorite-btn:hover:not(:disabled)::before {
+  width: 300px;
+  height: 300px;
+}
+
+.favorite-btn:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 92, 159, 0.4);
+  background: linear-gradient(135deg, #ff6b9d 0%, #c06bff 100%);
+  color: #ffffff;
+}
+
+.favorite-btn:active:not(:disabled) {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Favorited State */
+.favorite-btn.favorited {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c06bff 100%);
+  color: #ffffff;
+  cursor: not-allowed;
+  animation: heartbeat 0.8s ease-in-out;
+}
+
+.favorite-btn.favorited:hover {
+  transform: none;
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.5);
+}
+
+.favorite-btn:disabled {
+  opacity: 0.8;
+}
+
+/* Heartbeat Animation */
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  10%, 30% {
+    transform: scale(0.9);
+  }
+  20%, 40%, 60%, 80% {
+    transform: scale(1.1);
+  }
+  50%, 70% {
+    transform: scale(1.05);
+  }
+}
+
+/* Heart Icon Animation */
+.favorite-btn:not(.favorited):hover {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Shine Effect */
+.favorite-btn:not(:disabled)::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.favorite-btn:hover:not(:disabled)::after {
+  left: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .player-stats-page h1 {
+    font-size: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .favorite-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-stats-page h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .favorite-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .favorite-btn:not(.favorited) {
+    background: rgba(45, 55, 72, 0.95);
+    color: #ff6b9d;
+  }
+
+  .favorite-btn:not(.favorited):hover:not(:disabled) {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c06bff 100%);
+    color: #ffffff;
+  }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .player-stats-page {
+    margin: 1rem;
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .player-stats-page h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .player-stats-page > p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .player-stats-page strong::after {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-stats-page {
+    padding: 1rem;
+  }
+
+  .player-stats-page h1 {
+    font-size: 1.75rem;
+  }
+
+  .player-stats-page > p {
+    padding: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .player-stats-page strong {
+    font-size: 0.875rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .player-stats-page > p {
+    background: rgba(30, 30, 30, 0.95);
+    color: #ffffff;
+  }
+
+  .player-stats-page strong {
+    color: #a0aec0;
+  }
+
+  .player-stats-page p:not(:has(strong)) {
+    color: #ffffff;
+  }
+}

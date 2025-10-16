@@ -1,15 +1,21 @@
 package com.pl.premier_zone.player;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import com.pl.premier_zone.team.Team;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "prem_stats")
 public class Player {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name="player", unique=true)
     private String player;
 
@@ -26,12 +32,21 @@ public class Player {
     private Double crdr;
     private Double xg;
     private Double xag;
-    private String team;
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    @JsonBackReference
+    private Team team;
+
+
+
 
     public Player() {
     }
 
-    public Player(String player, String nation, String pos, Integer age, Integer mp, Integer starts, Double min, Double gls, Double ast, Double pk, Double crdy, Double crdr, Double xg, Double xag, String team) {
+
+
+    public Player(Integer id, String player, String nation, String pos, Integer age, Integer mp, Integer starts, Double min, Double gls, Double ast, Double pk, Double crdy, Double crdr, Double xg, Double xag, Team team) {
+        this.id = id;
         this.player = player;
         this.nation = nation;
         this.pos = pos;
@@ -47,6 +62,16 @@ public class Player {
         this.xg = xg;
         this.xag = xag;
         this.team = team;
+
+
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getPlayer() {
@@ -161,11 +186,11 @@ public class Player {
         this.xag = xag;
     }
 
-    public String getTeam() {
+    public Team getTeam() {
         return team;
     }
 
-    public void setTeam(String team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 }

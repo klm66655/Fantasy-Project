@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/player")
+@RequestMapping(path = "/api/v1/player")
+
+
+@CrossOrigin(origins = "http://localhost:3000",allowCredentials = "true")
+
 public class PlayerController {
 
     private final PlayerService playerService;
@@ -38,6 +42,16 @@ public class PlayerController {
         }
 
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Player> getPlayerById(@PathVariable Integer id) {
+        return playerService.getPlayerById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
     @PostMapping
     public ResponseEntity<Player> addPlayer(@RequestBody Player player) {
         Player createdPlayer = playerService.addPlayer(player);

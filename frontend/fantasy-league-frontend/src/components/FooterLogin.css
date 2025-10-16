@@ -1,0 +1,61 @@
+/* src/components/Footer.css */
+footer {
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+  margin-top: 60px;
+  text-align: center;
+  border-top: 2px solid rgba(0, 255, 135, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ff87, transparent);
+  box-shadow: 0 0 20px rgba(0, 255, 135, 0.5);
+}
+
+footer p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+footer p:first-of-type::before {
+  content: '⚽';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 135, 0.6));
+}
+
+footer p:last-of-type {
+  margin-top: 10px;
+  color: rgba(96, 239, 255, 0.6);
+  font-size: 0.85rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  footer {
+    padding: 30px 15px;
+    margin-top: 40px;
+  }
+
+  footer p {
+    font-size: 0.9rem;
+  }
+
+  footer p:last-of-type {
+    font-size: 0.8rem;
+  }
+}

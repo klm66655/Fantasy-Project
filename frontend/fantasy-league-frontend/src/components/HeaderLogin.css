@@ -1,0 +1,213 @@
+@import url('https://fonts.google.com/specimen/Bebas+Neue');
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  padding: 20px 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #00ff87 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 255, 135, 0.5));
+  position: relative;
+  text-shadow: 0 0 30px rgba(0, 255, 135, 0.3);
+}
+
+header h1::before {
+  content: '⚽';
+  position: absolute;
+  left: -45px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 15px rgba(0, 255, 135, 0.8));
+  animation: ballSpin 4s linear infinite;
+}
+
+header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00ff87, #60efff, #00ff87, transparent);
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(0, 255, 135, 0.6);
+}
+
+
+
+nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 135, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00ff87, #60efff);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 135, 0.8);
+}
+
+nav a:hover {
+  background: rgba(0, 255, 135, 0.1);
+  transform: translateY(-3px);
+  border-color: rgba(0, 255, 135, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 255, 135, 0.3);
+  color: #00ff87;
+}
+
+nav a:hover::before {
+  left: 100%;
+}
+
+nav a:hover::after {
+  width: 80%;
+}
+
+nav a:active {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  nav a {
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+  }
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+nav a:hover::before {
+  transform: translateX(0);
+}
+
+nav a:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 20px;
+    gap: 15px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  nav a {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  @keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes ballSpin {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+  }
+
+  header h1::before {
+    left: -35px;
+    font-size: 1.4rem;
+  }
+}
+}

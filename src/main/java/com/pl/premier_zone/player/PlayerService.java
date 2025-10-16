@@ -1,8 +1,12 @@
 package com.pl.premier_zone.player;
 
+import com.pl.premier_zone.team.Team;
+import com.pl.premier_zone.repo.TeamRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+
 
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +16,12 @@ import java.util.stream.Collectors;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final TeamRepo teamRepo;
 
     @Autowired
-    public PlayerService(PlayerRepository playerRepository){
+    public PlayerService(PlayerRepository playerRepository, TeamRepo teamRepo){
         this.playerRepository = playerRepository;
+        this.teamRepo = teamRepo;
     }
 
 
@@ -24,11 +30,33 @@ public class PlayerService {
     }
 
     public List<Player> getPlayersFromTeam(String teamName){
-        return playerRepository.findAll().stream()
-                .filter(player -> teamName
-                .equals(player.getTeam())).collect(Collectors.toList());
+        if (teamName == null || teamName.isEmpty()) {
+            return List.of();
+        }
 
+        String normalized = teamName.toLowerCase().replace("-", " ");
+        System.out.println("Looking for team: " + normalized);
+
+        List<Player> allPlayers = playerRepository.findAll();
+        allPlayers.forEach(p -> {
+            String team = p.getTeam() != null ? p.getTeam().getName() : "null";
+            System.out.println(p.getPlayer() + " -> " + team);
+        });
+
+        return allPlayers.stream()
+                .filter(player -> player.getTeam() != null && player.getTeam().getName() != null)
+                .filter(player -> player.getTeam().getName().toLowerCase().replace("-", " ").equals(normalized))
+                .collect(Collectors.toList());
     }
+
+    public Optional<Player> getPlayerById(Integer id) {
+        return playerRepository.findById(id);
+    }
+
+
+
+
+
 
     public List<Player> getPlayersByName(String searchText){
         return playerRepository.findAll().stream()
@@ -68,9 +96,13 @@ public class PlayerService {
         if (existingPlayer.isPresent()) {
             Player playerToUpdate = existingPlayer.get();
             playerToUpdate.setPlayer(updatedPlayer.getPlayer());
-            playerToUpdate.setTeam(updatedPlayer.getTeam());
             playerToUpdate.setPos(updatedPlayer.getPos());
             playerToUpdate.setNation(updatedPlayer.getNation());
+            // 🟢 Nađi tim po imenu iz updatedPlayer.getTeam().getName()
+            if (updatedPlayer.getTeam() != null && updatedPlayer.getTeam().getName() != null) {
+                Team team = teamRepo.findByName(updatedPlayer.getTeam().getName());
+                playerToUpdate.setTeam(team);
+            }
             playerRepository.save(playerToUpdate);
             return playerToUpdate;
         }
