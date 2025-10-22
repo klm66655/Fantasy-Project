@@ -6,6 +6,7 @@ export default function Header() {
       <nav>
         <a href="/" style={{ marginRight: "10px", color: "white" }}>Home</a>
         <a href="/login" style={{ color: "white" }}>Login</a>
+        <a href="/profile" style={{ color: "white" }}>Profile</a>
       </nav>
     </header>
   );

@@ -4,6 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import TeamPage from "./pages/TeamPage";
 import PlayerStatsPage from "./pages/PlayerStatsPage";
+import ProfilePage from "./pages/ProfilePage";
+import ViewPlayersPage from "./pages/ViewPlayersPage";
 
 
 
@@ -17,6 +19,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/teams/:id" element={<TeamPage />} />
         <Route path="/player/:id" element={<PlayerStatsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/players" element={<ViewPlayersPage />} />
+
       </Routes>
     </Router>
   );

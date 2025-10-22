@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import "./TeamPage.css";
 import { Link } from 'react-router-dom';
 import  Header  from "../components/HeaderLogin";
-import Footer from "../components/FooterLogin";
+
 
 
 export default function TeamPage() {
