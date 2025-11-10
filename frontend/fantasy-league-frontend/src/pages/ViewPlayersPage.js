@@ -14,26 +14,21 @@ export default function ViewPlayersPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch all players for top lists
-    const fetchPlayers = async () => {
-      try {
-        const res = await fetch("http://localhost:8080/api/v1/player", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-        if (!res.ok) throw new Error("Failed to fetch players");
-        const data = await res.json();
-        setPlayers(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPlayers();
-  }, [token]);
+  // Fetch all players for top lists
+  const fetchPlayers = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/player");
+      if (!res.ok) throw new Error("Failed to fetch players");
+      const data = await res.json();
+      setPlayers(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchPlayers();
+}, []);
 
   // Search lokalno po imenu igrača
   const handleSearch = (e) => {

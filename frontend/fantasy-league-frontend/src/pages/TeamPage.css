@@ -235,4 +235,311 @@
   .player-card:hover .player-name {
     color: #00d4ff;
   }
+
+  /* ========================================
+   ADMIN FUNCTIONALITY STYLES - ADD TO EXISTING TeamPage.css
+   ======================================== */
+
+/* Players Header with Add Button */
+.players-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+/* Add Player Button */
+.add-player-btn {
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
+  color: #0b132b;
+  border: none;
+  border-radius: 12px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 255, 135, 0.4);
+}
+
+.add-player-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 255, 135, 0.6);
+  background: linear-gradient(135deg, #60efff 0%, #00ff87 100%);
+}
+
+/* Player Actions (Edit & Delete buttons on cards) */
+.player-actions {
+  display: flex;
+  gap: 10px;
+  padding: 0 25px 20px;
+}
+
+.edit-btn,
+.delete-player-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background: rgba(96, 239, 255, 0.1);
+  color: #60efff;
+  border: 2px solid rgba(96, 239, 255, 0.3);
+}
+
+.edit-btn:hover {
+  background: rgba(96, 239, 255, 0.2);
+  border-color: #60efff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(96, 239, 255, 0.4);
+}
+
+.delete-player-btn {
+  background: rgba(255, 107, 107, 0.1);
+  color: #ff6b6b;
+  border: 2px solid rgba(255, 107, 107, 0.3);
+}
+
+.delete-player-btn:hover {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: #ff6b6b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Container */
+.player-modal {
+  max-width: 900px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal {
+  background: linear-gradient(145deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+  border-radius: 25px;
+  padding: 40px;
+  border: 2px solid rgba(0, 255, 135, 0.3);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 0 0 30px 0;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Player Form */
+.player-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.player-form input {
+  padding: 15px 20px;
+  border: 2px solid rgba(0, 255, 135, 0.3);
+  border-radius: 12px;
+  background: rgba(0, 255, 135, 0.05);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.player-form input:focus {
+  border-color: #00ff87;
+  background: rgba(0, 255, 135, 0.1);
+  box-shadow: 0 0 20px rgba(0, 255, 135, 0.3);
+}
+
+.player-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 16px 30px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.modal-buttons .add-btn {
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
+  color: #0b132b;
+  font-weight: 700;
+  box-shadow: 0 6px 20px rgba(0, 255, 135, 0.4);
+}
+
+.modal-buttons .add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 255, 135, 0.6);
+}
+
+.cancel-btn {
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+  border: 2px solid rgba(255, 107, 107, 0.4);
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 107, 107, 0.25);
+  border-color: #ff6b6b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  text-align: center;
+  font-size: 2rem;
+  color: #00ff87;
+  padding: 150px 20px;
+  animation: pulse 1.5s ease infinite;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+/* Error Message */
+.error {
+  color: #ff6b6b;
+  text-align: center;
+  margin: 100px auto;
+  padding: 20px 30px;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 107, 107, 0.3);
+  font-size: 1.2rem;
+  font-weight: 600;
+  max-width: 600px;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN FOR ADMIN FEATURES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .players-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .add-player-btn {
+    width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 30px 20px;
+  }
+
+  .modal h2 {
+    font-size: 2rem;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  .player-actions {
+    padding: 0 15px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-player-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .edit-btn,
+  .delete-player-btn {
+    font-size: 16px;
+    padding: 8px;
+  }
+}
 }

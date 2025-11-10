@@ -17,7 +17,8 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        // Dodaje prefix ROLE_ jer Spring Security zahteva
+        return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 
     @Override

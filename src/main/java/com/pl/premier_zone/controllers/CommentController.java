@@ -34,14 +34,29 @@ public class CommentController {
 
     // Dodaj komentar za igrača
     @PostMapping("/{playerId}")
-    public ResponseEntity<Comment> addComment(
+    public ResponseEntity<CommentResponseDTO> addComment(
             @PathVariable Integer playerId,
             @RequestBody CommentRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        Comment comment = commentService.addComment(playerId, username, request.getContent());
+        CommentResponseDTO comment = commentService.addComment(playerId, username, request.getContent());
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
 
+    // Obriši komentar (samo za ADMIN)
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        // Provera da li je korisnik admin
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (!isAdmin) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        commentService.deleteComment(commentId);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,6 +1,7 @@
 package com.pl.premier_zone.services;
 
 import com.pl.premier_zone.repo.UserRepo;
+import com.pl.premier_zone.user.Role;
 import com.pl.premier_zone.user.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,4 +44,15 @@ public class JuzerService {
     public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
+
+    public Users updateUserRole(int id, Role newRole) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setRole(newRole.name());
+                    return userRepository.save(user);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+
 }

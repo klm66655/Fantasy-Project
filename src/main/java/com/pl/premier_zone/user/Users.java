@@ -3,6 +3,9 @@ package com.pl.premier_zone.user;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity
 public class Users {
@@ -14,7 +17,9 @@ public class Users {
     private String password;
     private String role;
 
-    @Column(name = "created_at")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     public int getId() {

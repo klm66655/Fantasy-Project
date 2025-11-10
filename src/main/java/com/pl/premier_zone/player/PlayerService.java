@@ -24,7 +24,6 @@ public class PlayerService {
         this.teamRepo = teamRepo;
     }
 
-
     public List<Player> getPlayers(){
         return playerRepository.findAll();
     }
@@ -53,16 +52,10 @@ public class PlayerService {
         return playerRepository.findById(id);
     }
 
-
-
-
-
-
     public List<Player> getPlayersByName(String searchText){
         return playerRepository.findAll().stream()
                 .filter(player -> player.getPlayer().toLowerCase()
-                .contains(searchText.toLowerCase())).collect(Collectors.toList());
-
+                        .contains(searchText.toLowerCase())).collect(Collectors.toList());
     }
 
     public List<Player> getPlayerByPos(String searchText){
@@ -72,17 +65,16 @@ public class PlayerService {
                 .collect(Collectors.toList());
     }
 
-
     public List<Player> getPlayerByNation(String searchText){
         return playerRepository.findAll().stream()
                 .filter(player -> player.getNation() != null &&
-                player.getNation().toLowerCase().contains(searchText.toLowerCase())).toList();
+                        player.getNation().toLowerCase().contains(searchText.toLowerCase())).toList();
     }
 
     public List<Player> getPlayersByTeamAndPos(String team, String pos){
         return playerRepository.findAll().stream()
                 .filter(player -> player.getTeam()
-                .equals(team) && player.getPos().equals(pos))
+                        .equals(team) && player.getPos().equals(pos))
                 .collect(Collectors.toList());
     }
 
@@ -91,24 +83,47 @@ public class PlayerService {
         return player;
     }
 
+    // ✅ FIXED: Update player by ID and update ALL fields
     public Player updatePlayer(Player updatedPlayer){
-        Optional<Player> existingPlayer = playerRepository.findByPlayer(updatedPlayer.getPlayer());
+        // 🔴 OLD: Optional<Player> existingPlayer = playerRepository.findByPlayer(updatedPlayer.getPlayer());
+        // ✅ NEW: Find by ID instead of name
+        Optional<Player> existingPlayer = playerRepository.findById(updatedPlayer.getId());
+
         if (existingPlayer.isPresent()) {
             Player playerToUpdate = existingPlayer.get();
+
+            // Update basic info
             playerToUpdate.setPlayer(updatedPlayer.getPlayer());
             playerToUpdate.setPos(updatedPlayer.getPos());
             playerToUpdate.setNation(updatedPlayer.getNation());
-            // 🟢 Nađi tim po imenu iz updatedPlayer.getTeam().getName()
-            if (updatedPlayer.getTeam() != null && updatedPlayer.getTeam().getName() != null) {
-                Team team = teamRepo.findByName(updatedPlayer.getTeam().getName());
-                playerToUpdate.setTeam(team);
+            playerToUpdate.setAge(updatedPlayer.getAge());
+
+            // ✅ Update ALL statistics
+            playerToUpdate.setMp(updatedPlayer.getMp());
+            playerToUpdate.setStarts(updatedPlayer.getStarts());
+            playerToUpdate.setMin(updatedPlayer.getMin());
+            playerToUpdate.setGls(updatedPlayer.getGls());
+            playerToUpdate.setAst(updatedPlayer.getAst());
+            playerToUpdate.setPk(updatedPlayer.getPk());
+            playerToUpdate.setCrdy(updatedPlayer.getCrdy());
+            playerToUpdate.setCrdr(updatedPlayer.getCrdr());
+            playerToUpdate.setXg(updatedPlayer.getXg());
+            playerToUpdate.setXag(updatedPlayer.getXag());
+
+            // Update team
+            if (updatedPlayer.getTeam() != null) {
+                // 🔴 OLD: Team team = teamRepo.findByName(updatedPlayer.getTeam().getName());
+                // ✅ NEW: Find by ID (more reliable)
+                Optional<Team> team = teamRepo.findById(updatedPlayer.getTeam().getId());
+                team.ifPresent(playerToUpdate::setTeam);
             }
+
             playerRepository.save(playerToUpdate);
             return playerToUpdate;
         }
         return null;
-
     }
+
     @Transactional
     public void deletePlayer(String playerName) {
         playerRepository.deleteByPlayer(playerName);

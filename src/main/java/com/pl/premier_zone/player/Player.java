@@ -1,10 +1,14 @@
 package com.pl.premier_zone.player;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.pl.premier_zone.highlight.Highlight;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import com.pl.premier_zone.team.Team;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -36,6 +40,9 @@ public class Player {
     @JoinColumn(name = "team_id")
     @JsonBackReference
     private Team team;
+
+    @OneToMany(mappedBy = "player")
+    private List<Highlight> highlights;
 
 
 

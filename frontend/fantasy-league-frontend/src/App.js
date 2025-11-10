@@ -6,6 +6,10 @@ import TeamPage from "./pages/TeamPage";
 import PlayerStatsPage from "./pages/PlayerStatsPage";
 import ProfilePage from "./pages/ProfilePage";
 import ViewPlayersPage from "./pages/ViewPlayersPage";
+import HighlightsPage from './pages/HighlightsPage';
+import AddHighlightPage from './pages/AddHighlightPage';
+
+
 
 
 
@@ -21,6 +25,10 @@ function App() {
         <Route path="/player/:id" element={<PlayerStatsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/players" element={<ViewPlayersPage />} />
+        <Route path="/highlights" element={<HighlightsPage />} />
+        <Route path="/addhighlights" element={<AddHighlightPage />} />
+        
+
 
       </Routes>
     </Router>

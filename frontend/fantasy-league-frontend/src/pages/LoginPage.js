@@ -12,39 +12,43 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
 
-  const fetchCurrentUserId = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return null;
+  const fetchCurrentUser = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
 
-    const res = await fetch("http://localhost:8080/api/users/me", {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+  const res = await fetch("http://localhost:8080/api/users/me", {
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
 
-    if (!res.ok) return null;
+  if (!res.ok) return null;
 
-    const user = await res.json();
-    localStorage.setItem("userId", user.id);
-    return user.id;
-  };
+  const user = await res.json();
+  // Sačuvaj ID i role u localStorage
+  localStorage.setItem("userId", user.id);
+  localStorage.setItem("role", user.role); // <-- ovo je ključno za frontend
+  return user;
+};
+
 
    const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = await login(username, password);
-      localStorage.setItem("token", token);
+  e.preventDefault();
+  try {
+    const token = await login(username, password);
+    localStorage.setItem("token", token);
 
-      const userId = await fetchCurrentUserId();
-      if (!userId) {
-        setError("Failed to fetch user info");
-        return;
-      }
-
-      alert("Logged in successfully!");
-      navigate("/");
-    } catch (err) {
-      setError("Invalid credentials");
+    const user = await fetchCurrentUser();
+    if (!user) {
+      setError("Failed to fetch user info");
+      return;
     }
-  };
+
+    alert(`Logged in successfully as ${user.role}!`);
+    navigate("/"); // ideš na dashboard ili home
+  } catch (err) {
+    setError("Invalid credentials");
+  }
+};
+
 
   
 

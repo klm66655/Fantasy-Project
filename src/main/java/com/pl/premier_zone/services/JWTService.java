@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 @Service
@@ -34,18 +31,19 @@ public class JWTService {
 
 
 
-    public String generateToken(String username) {
+    public String generateToken(String username, List<String> roles) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("roles", roles); // Dodajemo role u token
+
         return Jwts.builder()
-                .claims()
-                .add(claims)
-                .subject(username)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
-                .and()
-                .signWith(getKey())
+                .setClaims(claims)             // setujemo claims
+                .setSubject(username)           // subject = username
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .signWith(getKey())             // potpis sa tajnim ključem
                 .compact();
     }
+
 
 
 

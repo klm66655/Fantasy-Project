@@ -23,6 +23,8 @@ public class Team {
     private String stadium;
     private String manager;
     private String founded;
+
+    @Column(name = "logo_url")
     private String logoUrl;
 
     // 👇 povezano s Player klasom

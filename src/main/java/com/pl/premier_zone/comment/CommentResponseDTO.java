@@ -3,7 +3,7 @@ package com.pl.premier_zone.comment;
 import java.time.LocalDateTime;
 
 public class CommentResponseDTO {
-
+    private Integer id;
     private String content;
     private String username;
     private LocalDateTime createdAt;
@@ -11,13 +11,22 @@ public class CommentResponseDTO {
     public CommentResponseDTO() {
     }
 
-    public CommentResponseDTO(String content, String username, LocalDateTime createdAt) {
+    public CommentResponseDTO(Integer id, String content, String username, LocalDateTime createdAt) {
+        this.id = id;
         this.content = content;
         this.username = username;
         this.createdAt = createdAt;
     }
 
-    // Getteri i setteri
+    // Getters and Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getContent() {
         return content;
     }
